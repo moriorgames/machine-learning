@@ -9,9 +9,10 @@ include_directories(${ARMADILLO_INCLUDE_DIRS})
 
 MESSAGE(STATUS "Armadillo libraries: ${ARMADILLO_LIBRARIES}")
 
-add_executable(
-        main
-        main.cpp
-)
+add_subdirectory(src)
+add_subdirectory(tests)
 
+add_executable(main main.cpp)
+
+target_link_libraries(main moriorgames_ml)
 target_link_libraries(main ${ARMADILLO_LIBRARIES})

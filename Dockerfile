@@ -10,6 +10,12 @@ RUN apt-get install -y gcc
 RUN apt-get install -y cmake
 RUN apt-get install -y build-essential
 
+# Install some C++ libraries needed for the project
+RUN apt-get install -y liblapack-dev
+RUN apt-get install -y libblas-dev
+RUN apt-get install -y libboost-dev
+RUN apt-get install -y libarmadillo-dev
+
 # Create Application directory
 RUN mkdir -p /app
 COPY . /app

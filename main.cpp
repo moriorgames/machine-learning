@@ -1,10 +1,16 @@
 #include <iostream>
+#include <armadillo>
+
 using namespace std;
 
 int main()
 {
-   cout << "Hello world" << endl;
-   cout << "From a C++ Program" << endl;
+    arma::mat inputs(3, 2, arma::fill::ones);
 
-   return EXIT_SUCCESS;
+    cout << "Creating a C++ with some linear algebra library (Armadillo)" << endl;
+
+    cout << "inputs" << endl;
+    cout << inputs << endl;
+
+    return EXIT_SUCCESS;
 }

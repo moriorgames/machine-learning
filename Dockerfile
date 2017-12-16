@@ -1,5 +1,5 @@
 # Build command:
-# docker build -t moriorgames/cpp14 .
+# docker build -t moriorgames/ml .
 FROM ubuntu:17.10
 MAINTAINER MoriorGames "moriorgames@gmail.com"
 
@@ -13,7 +13,7 @@ RUN apt-get install -y build-essential
 # Install some C++ libraries needed for the project
 RUN apt-get install -y liblapack-dev
 RUN apt-get install -y libblas-dev
-RUN apt-get install -y libboost-dev
+RUN apt-get install -y libboost-all-dev
 RUN apt-get install -y libarmadillo-dev
 
 # Create Application directory

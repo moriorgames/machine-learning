@@ -6,8 +6,9 @@ include_directories(
 
 add_executable(
         testsuite
-        MoriorGames/Services/FakeServiceTest.cpp
         test.cpp
+        MoriorGames/Parsers/FileParserTest.cpp
+        MoriorGames/Services/FakeServiceTest.cpp
 )
 
 target_link_libraries(
@@ -17,3 +18,8 @@ target_link_libraries(
         ${Boost_SYSTEM_LIBRARY}
         ${Boost_UNIT_TEST_FRAMEWORK_LIBRARY}
 )
+
+FIND_PROGRAM( GCOV_PATH gcov )
+FIND_PROGRAM( LCOV_PATH lcov )
+FIND_PROGRAM( GENHTML_PATH genhtml )
+FIND_PROGRAM( GCOVR_PATH gcovr PATHS ${CMAKE_SOURCE_DIR}/tests)

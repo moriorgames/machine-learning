@@ -22,7 +22,9 @@ cmake_install.cmake
 MachineLearning.cbp
 
 # Build
+src/libmoriorgames_ml.a
 main
+tests/testsuite
 
 # Code coverage helper files
 .gcda

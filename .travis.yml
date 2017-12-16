@@ -1,0 +1,14 @@
+sudo: required
+
+language: cpp
+
+services:
+  - docker
+
+before_install:
+- docker pull moriorgames/ml
+- docker build -t moriorgames/ml .
+- docker run -td --name machine_learn moriorgames/ml
+
+script:
+- docker exec machine_learn ./tests/testsuite

@@ -8,6 +8,7 @@ add_executable(
         testsuite
         test.cpp
         MoriorGames/Parsers/FileParserTest.cpp
+        MoriorGames/Services/DataTransformerTest.cpp
         MoriorGames/Services/FakeServiceTest.cpp
 )
 

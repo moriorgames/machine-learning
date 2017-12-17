@@ -14,7 +14,6 @@ class FileParser
 {
 public:
     arma::mat load(std::string fileName);
-    void test();
 private:
     arma::uword getFileRows(std::ifstream &file);
     arma::uword getFileCols(std::ifstream &file);

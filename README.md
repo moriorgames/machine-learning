@@ -1,6 +1,8 @@
 Machine Learning in C++
 =======================
 
+[![Build Status](https://travis-ci.org/moriorgames/machine-learning.svg?branch=add-travis-ci)](https://travis-ci.org/moriorgames/machine-learning)
+
 This repository is intended to be a Machine Learning written in C++ for I+D purposes.
 The aim is be able to create a Machine Learning full performance, create a docker image from this code and deploy it into a production server easily.
 
@@ -31,6 +33,11 @@ $ docker exec -ti machine_learn ./main
 * Execute the Tests
 ```
 $ docker exec -ti machine_learn ./tests/testsuite
+```
+
+* Execute the code coverage locally
+```
+$ sh scripts/coverage.sh
 ```
 
 ## Docker Images

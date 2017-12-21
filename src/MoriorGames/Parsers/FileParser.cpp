@@ -2,11 +2,6 @@
 
 using MoriorGames::FileParser;
 
-void MoriorGames::FileParser::test()
-{
-    std::cout << "Test is working on File Parser\n" << std::endl;
-}
-
 arma::mat FileParser::load(std::string fileName)
 {
     // This size must be fixed

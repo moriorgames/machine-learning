@@ -1,8 +1,7 @@
 #!/usr/bin/env bash
 
 # Remove previous coverage files
-rm -rf *.gcda
-rm -rf *.gcno
+rm -rf tests/CMakeFiles/*
 rm -rf coverage/index*
 touch coverage/index.html
 
@@ -16,7 +15,3 @@ make
 gcovr -r $(pwd) --html --html-details -s \
 --exclude 'Mocks' --exclude 'tests' \
 -o "$(pwd)/coverage/index.html"
-
-# Clean project after generating the coverage
-rm -rf *.gcda
-rm -rf *.gcno

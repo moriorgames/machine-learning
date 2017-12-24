@@ -9,15 +9,9 @@ if ("$ENV{DEBUG_MODE}" STREQUAL "true")
     MESSAGE(STATUS "Executing Code Coverage...")
 endif()
 
-find_package(Armadillo REQUIRED)
-include_directories(${ARMADILLO_INCLUDE_DIRS})
-
-MESSAGE(STATUS "Armadillo libraries: ${ARMADILLO_LIBRARIES}")
-
 add_subdirectory(src)
 add_subdirectory(tests)
 
 add_executable(main main.cpp)
 
 target_link_libraries(main moriorgames_ml)
-target_link_libraries(main ${ARMADILLO_LIBRARIES})

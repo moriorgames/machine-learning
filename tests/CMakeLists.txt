@@ -8,8 +8,8 @@ add_executable(
         testsuite
         test.cpp
         MoriorGames/Parsers/FileParserTest.cpp
+        MoriorGames/Services/CostFunctionTest.cpp
         MoriorGames/Services/DataTransformerTest.cpp
-        MoriorGames/Services/FakeServiceTest.cpp
 )
 
 target_link_libraries(

@@ -8,6 +8,7 @@ add_library(
         MoriorGames/Parsers/FileParser.cpp
         MoriorGames/Services/CostFunction.cpp
         MoriorGames/Services/DataTransformer.cpp
+        MoriorGames/Services/GradientDescent.cpp
 )
 
 target_link_libraries(moriorgames_ml ${ARMADILLO_LIBRARIES})

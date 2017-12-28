@@ -10,6 +10,7 @@ add_executable(
         MoriorGames/Parsers/FileParserTest.cpp
         MoriorGames/Services/CostFunctionTest.cpp
         MoriorGames/Services/DataTransformerTest.cpp
+        MoriorGames/Services/GradientDescentTest.cpp
 )
 
 target_link_libraries(

@@ -10,13 +10,14 @@ class DataTransformer
 {
 public:
     explicit DataTransformer(arma::mat &data);
-    arma::mat extractInputs();
     arma::mat extractOutput();
     arma::mat extractHypothesis();
     arma::mat extractNormalizedFeatures();
+    void setData(arma::mat &data);
 
 private:
     arma::mat &data;
+    arma::mat extractInputs();
 };
 
 }

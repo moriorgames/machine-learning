@@ -9,6 +9,6 @@ add_library(
         MoriorGames/Services/CostFunction.cpp
         MoriorGames/Services/DataTransformer.cpp
         MoriorGames/Services/GradientDescent.cpp
-)
+        MoriorGames/Services/LinearRegression.cpp MoriorGames/Services/LinearRegression.h MoriorGames/Services/Resolver.cpp MoriorGames/Services/Resolver.h)
 
 target_link_libraries(moriorgames_ml ${ARMADILLO_LIBRARIES})

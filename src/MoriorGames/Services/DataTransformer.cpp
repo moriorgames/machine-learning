@@ -9,18 +9,6 @@ DataTransformer::DataTransformer(arma::mat &data)
 //    std::cout << "data.n_cols:\n" << data.n_cols << std::endl;
 }
 
-arma::mat DataTransformer::extractInputs()
-{
-    // Add a column of ones to X
-    arma::mat inputs(data.n_rows, data.n_cols, arma::fill::ones);
-
-    for (arma::uword i = 1; i < data.n_cols; ++i) {
-        inputs.col(i) = data.col(i - 1);
-    }
-
-    return inputs;
-}
-
 arma::mat DataTransformer::extractOutput()
 {
     arma::mat output = data.col(data.n_cols - 1);
@@ -49,4 +37,21 @@ arma::mat MoriorGames::DataTransformer::extractNormalizedFeatures()
 //    std::cout << "range:\n" << range << std::endl;
 
     return features;
+}
+
+void DataTransformer::setData(arma::mat &data)
+{
+    this->data = data;
+}
+
+arma::mat DataTransformer::extractInputs()
+{
+    // Add a column of ones to X
+    arma::mat inputs(data.n_rows, data.n_cols, arma::fill::ones);
+
+    for (arma::uword i = 1; i < data.n_cols; ++i) {
+        inputs.col(i) = data.col(i - 1);
+    }
+
+    return inputs;
 }

@@ -1,14 +1,14 @@
-#include <iostream>
-#include <armadillo>
+#include "src/MoriorGames/Services/LinearRegression.h"
 
-using namespace std;
+#include <string>
 
 int main()
 {
-    arma::mat inputs(3, 2, arma::fill::ones);
+    std::string train = "tests/fixtures/multi-variable.txt";
+    std::string toResolve = "tests/fixtures/to-resolve.txt";
+    int iterate = 500;
+    double learningRate = 0.01;
+    (new MoriorGames::LinearRegression)->execute(train, toResolve, iterate, learningRate);
 
-    cout << "Creating a C++ with some linear algebra library (Armadillo)" << endl;
-    cout << "Nothing to do" << endl;
-
-    return EXIT_SUCCESS;
+    return 0;
 }

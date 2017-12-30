@@ -10,15 +10,6 @@ BOOST_AUTO_TEST_CASE(constructor_data_transformer)
     new DataTransformer(data);
 }
 
-BOOST_AUTO_TEST_CASE(data_transformer_should_add_ones_column_to_features)
-{
-    arma::mat data(3, 3, arma::fill::ones);
-    auto obj = new DataTransformer(data);
-    auto inputs = obj->extractInputs();
-
-    BOOST_CHECK(inputs[0] == 1);
-}
-
 BOOST_AUTO_TEST_CASE(data_transformer_should_extract_last_column_of_outputs)
 {
     arma::mat data(3, 3, arma::fill::ones);

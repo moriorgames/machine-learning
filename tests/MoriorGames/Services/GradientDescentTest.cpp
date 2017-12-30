@@ -17,14 +17,14 @@ BOOST_AUTO_TEST_CASE(gradient_descent_on_single_variale)
     auto data = (new FileParser)->load("tests/fixtures/single-variable.txt");
 
     auto dataTransformer = new DataTransformer(data);
-    auto inputs = dataTransformer->extractInputs();
+    auto inputs = dataTransformer->extractNormalizedFeatures();
     auto output = dataTransformer->extractOutput();
     auto hypothesis = dataTransformer->extractHypothesis();
 
     auto prediction = GradientDescent::execute(inputs, output, hypothesis, learningRate, iterations);
 
-    BOOST_CHECK(std::abs(prediction[0] - -3.8035) < 0.01);
-    BOOST_CHECK(std::abs(prediction[1] - -35.7509) < 0.01);
+    BOOST_CHECK(std::abs(prediction[0] - 1.5332) < 0.01);
+    BOOST_CHECK(std::abs(prediction[1] - 1.2014) < 0.01);
 }
 
 BOOST_AUTO_TEST_CASE(gradient_descent_on_multiple_variables)

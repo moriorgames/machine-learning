@@ -1,15 +1,9 @@
 
-# GIT
-.git
-
 # OSX
 .DS_Store
 .AppleDouble
 .LSOverride
 .idea
-
-# Thumbnails
-._*
 
 # Cmake Files
 cmake-build-debug
@@ -25,14 +19,13 @@ cmake_install.cmake
 MachineLearning.cbp
 
 # Build
+src/libmoriorgames_ml.a
 main
+tests/testsuite
+result.csv
 
 # Code coverage helper files
 .gcda
 .gcno
 coverage/index*
 !coverage/index.html
-
-# Recycle Bin used on file shares
-*.gcda
-*.gcno

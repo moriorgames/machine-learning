@@ -11,7 +11,7 @@ add_executable(
         MoriorGames/Services/CostFunctionTest.cpp
         MoriorGames/Services/DataTransformerTest.cpp
         MoriorGames/Services/GradientDescentTest.cpp
-        MoriorGames/Services/ResolverTest.cpp)
+        MoriorGames/Services/ResolverTest.cpp MoriorGames/Parsers/MnistParserTest.cpp)
 
 target_link_libraries(
         testsuite

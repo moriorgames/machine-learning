@@ -42,7 +42,7 @@ $ sh scripts/coverage.sh
 
 ## Docker Images
 
-I like to preserve information about tagging and pushing images to docker
+I like to preserve information about tagging and pushing imageFile to docker
 
 * First login at dockerhub
 ```

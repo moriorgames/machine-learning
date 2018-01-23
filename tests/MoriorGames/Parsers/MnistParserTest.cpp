@@ -4,13 +4,14 @@
 
 using MoriorGames::MnistParser;
 
-BOOST_AUTO_TEST_CASE(should_be_able_to_instantiate_mnist_parser)
+BOOST_AUTO_TEST_CASE(should_be_able_to_read_and_store_mnist_files)
 {
-    new MnistParser("", "");
+    auto parser = new MnistParser("data/test-image-file-ubyte", "data/test-labels-file-ubyte");
+    parser->showRandomCharacterInBinary();
 }
 
-BOOST_AUTO_TEST_CASE(should_read_mnist_image_file)
+BOOST_AUTO_TEST_CASE(should_throw_exceptions_when_file_not_found)
 {
-    auto parser = new MnistParser("data/t10k-images-idx3-ubyte", "");
-    parser->readImages();
+    BOOST_CHECK_THROW(new MnistParser("fake_file", "data/test-labels-file-ubyte"), std::runtime_error);
+    BOOST_CHECK_THROW(new MnistParser("data/test-image-file-ubyte", "fake_file"), std::runtime_error);
 }

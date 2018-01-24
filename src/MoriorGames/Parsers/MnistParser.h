@@ -15,6 +15,16 @@ public:
     MnistParser(const std::string &imageFile, const std::string &labelsFile);
     void showRandomCharacterInBinary();
 
+    uchar **getImages() const
+    {
+        return images;
+    }
+
+    uchar *getLabels() const
+    {
+        return labels;
+    }
+
 private:
     int numberOfImages;
     int imageSize;

@@ -9,6 +9,6 @@ add_library(
         MoriorGames/Services/CostFunction.cpp
         MoriorGames/Services/DataTransformer.cpp
         MoriorGames/Services/GradientDescent.cpp
-        MoriorGames/Services/LinearRegression.cpp MoriorGames/Services/LinearRegression.h MoriorGames/Services/Resolver.cpp MoriorGames/Services/Resolver.h MoriorGames/Parsers/MnistParser.cpp MoriorGames/Parsers/MnistParser.h)
+        MoriorGames/Services/LinearRegression.cpp MoriorGames/Services/LinearRegression.h MoriorGames/Services/Resolver.cpp MoriorGames/Services/Resolver.h MoriorGames/Parsers/MnistParser.cpp MoriorGames/Parsers/MnistParser.h MoriorGames/Services/MnistNeuralNetwork.cpp MoriorGames/Services/MnistNeuralNetwork.h)
 
 target_link_libraries(moriorgames_ml ${ARMADILLO_LIBRARIES})

@@ -7,11 +7,14 @@ include_directories(
 add_executable(
         testsuite
         test.cpp
+        MoriorGames/Entity/NeuronTest.cpp
         MoriorGames/Parsers/FileParserTest.cpp
+        MoriorGames/Parsers/MnistParserTest.cpp
         MoriorGames/Services/CostFunctionTest.cpp
         MoriorGames/Services/DataTransformerTest.cpp
         MoriorGames/Services/GradientDescentTest.cpp
-        MoriorGames/Services/ResolverTest.cpp MoriorGames/Parsers/MnistParserTest.cpp)
+        MoriorGames/Services/ResolverTest.cpp
+)
 
 target_link_libraries(
         testsuite
@@ -21,7 +24,7 @@ target_link_libraries(
         ${Boost_UNIT_TEST_FRAMEWORK_LIBRARY}
 )
 
-FIND_PROGRAM( GCOV_PATH gcov )
-FIND_PROGRAM( LCOV_PATH lcov )
-FIND_PROGRAM( GENHTML_PATH genhtml )
-FIND_PROGRAM( GCOVR_PATH gcovr PATHS ${CMAKE_SOURCE_DIR}/tests)
+FIND_PROGRAM(GCOV_PATH gcov)
+FIND_PROGRAM(LCOV_PATH lcov)
+FIND_PROGRAM(GENHTML_PATH genhtml)
+FIND_PROGRAM(GCOVR_PATH gcovr PATHS ${CMAKE_SOURCE_DIR}/tests)

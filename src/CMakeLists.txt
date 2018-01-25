@@ -5,10 +5,15 @@ MESSAGE(STATUS "Armadillo libraries: ${ARMADILLO_LIBRARIES}")
 
 add_library(
         moriorgames_ml
+        MoriorGames/Entity/Neuron.cpp
         MoriorGames/Parsers/FileParser.cpp
+        MoriorGames/Parsers/MnistParser.cpp
         MoriorGames/Services/CostFunction.cpp
         MoriorGames/Services/DataTransformer.cpp
         MoriorGames/Services/GradientDescent.cpp
-        MoriorGames/Services/LinearRegression.cpp MoriorGames/Services/LinearRegression.h MoriorGames/Services/Resolver.cpp MoriorGames/Services/Resolver.h MoriorGames/Parsers/MnistParser.cpp MoriorGames/Parsers/MnistParser.h MoriorGames/Services/MnistNeuralNetwork.cpp MoriorGames/Services/MnistNeuralNetwork.h)
+        MoriorGames/Services/LinearRegression.cpp
+        MoriorGames/Services/MnistNeuralNetwork.cpp
+        MoriorGames/Services/Resolver.cpp
+)
 
 target_link_libraries(moriorgames_ml ${ARMADILLO_LIBRARIES})

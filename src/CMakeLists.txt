@@ -14,6 +14,6 @@ add_library(
         MoriorGames/Services/LinearRegression.cpp
         MoriorGames/Services/MnistNeuralNetwork.cpp
         MoriorGames/Services/Resolver.cpp
-)
+        MoriorGames/Utils/BlockTimer.cpp MoriorGames/Utils/BlockTimer.h)
 
 target_link_libraries(moriorgames_ml ${ARMADILLO_LIBRARIES})

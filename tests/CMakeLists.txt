@@ -14,7 +14,7 @@ add_executable(
         MoriorGames/Services/DataTransformerTest.cpp
         MoriorGames/Services/GradientDescentTest.cpp
         MoriorGames/Services/ResolverTest.cpp
-)
+        MoriorGames/Utils/BlockTimerTest.cpp)
 
 target_link_libraries(
         testsuite

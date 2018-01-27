@@ -1,39 +1,57 @@
-#include "src/MoriorGames/Parsers/MnistParser.h"
-#include "src/MoriorGames/Services/LinearRegression.h"
-#include "src/MoriorGames/Services/MnistNeuralNetwork.h"
-#include "src/MoriorGames/Utils/BlockTimer.h"
+#include "src/MoriorGames/Entity/Layer.h"
 
-const size_t c_trainingEpochs = 30;
+#include <iostream>
+#include <fstream>
 
-const size_t c_miniBatchSize = 10;
+using namespace std;
+using MoriorGames::Layer;
 
-const float c_learningRate = 3.0f;
+// Training image file name
+const string training_image_fn = "data/train-images-ubyte";
 
-using MoriorGames::BlockTimer;
+// Training label file name
+const string training_label_fn = "data/train-labels-ubyte";
+
+const int width = 28;
+
+const int height = 28;
+
+const int epochs = 512;
+
+vector<int> mnistImage;
 
 int main()
 {
-//    std::string train = "tests/fixtures/multi-variable.txt";
-//    std::string toResolve = "tests/fixtures/to-resolve.txt";
-//    int iterate = 500;
-//    double learningRate = 0.01;
-//    (new MoriorGames::LinearRegression)->execute(train, toResolve, iterate, learningRate);
+    ifstream image;
+    image.open(training_image_fn.c_str(), ios::in | ios::binary); // Binary image file
 
+    // Reading file headers
+    char number;
+    for (int i = 1; i <= 16; ++i) {
+        image.read(&number, sizeof(char));
+    }
 
-    // load the MNIST data if we can
-    auto parser = new MoriorGames::MnistParser("data/train-images-ubyte", "data/train-labels-ubyte");
-    parser->showRandomCharacterInBinary();
+    // Reading image
+    for (int i = 0; i < INPUT_NEURONS; ++i) {
+        image.read(&number, sizeof(char));
+        if (number == 0) {
+            mnistImage.push_back(0);
+        } else {
+            mnistImage.push_back(1);
+        }
+    }
 
-    BlockTimer timer("Training Time:  ");
+    auto neuron = new Neuron(mnistImage);
+    neuron->print();
 
-    auto neuralNetwork = new MoriorGames::MnistNeuralNetwork;
-    auto data = parser->getImages();
+    for (int i = 1; i <= epochs; ++i) {
 
-    // train the network, reporting error before each training
-    for (size_t epoch = 0; epoch < c_trainingEpochs; ++epoch) {
-        printf("Training epoch %zu / %zu...n", epoch + 1, c_trainingEpochs);
-        neuralNetwork->train(data, c_miniBatchSize, c_learningRate);
-        std::cout << std::endl;
+        neuron->calculateOutput();
+//        perceptron();
+//        back_propagation();
+//        if (square_error() < epsilon) {
+//            return i;
+//        }
     }
 
     return 0;

@@ -1,7 +1,7 @@
 #ifndef MORIOR_GAMES_ENTITY_LAYER_H
 #define MORIOR_GAMES_ENTITY_LAYER_H
 
-#include <vector>
+#include <iostream>
 #include "Neuron.h"
 
 using namespace std;
@@ -12,10 +12,13 @@ namespace MoriorGames {
 class Layer
 {
 public:
-    Layer(vector<int> structure);
+    Layer(const vector<double> &inputs, const vector<double> &outputs);
+    void print();
 
 private:
-    vector<Neuron *> neurons;
+    Neuron *inputNeuron;
+    Neuron *hiddenNeuron;
+    Neuron *outputNeuron;
 };
 
 }

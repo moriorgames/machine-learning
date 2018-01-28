@@ -2,10 +2,15 @@
 
 using MoriorGames::Neuron;
 
-Neuron::Neuron(const vector<int> &inputs)
+Neuron::Neuron(const vector<double> &inputs)
     : inputs{inputs}
 {
     init();
+}
+
+const vector<double> &Neuron::getInputs() const
+{
+    return inputs;
 }
 
 double Neuron::calculateOutput()
@@ -22,7 +27,7 @@ void Neuron::print()
 {
     cout << "Image:" << endl;
     for (int i = 1; i <= inputs.size(); ++i) {
-        cout << inputs[i];
+        cout << (int) inputs[i];
         if (i % IMAGE_SIZE == 0) {
             cout << endl;
         }
@@ -57,3 +62,4 @@ double Neuron::sigmoid(double x)
 {
     return 1.0 / (1.0 + exp(-x));
 }
+

@@ -14,12 +14,13 @@ namespace MoriorGames {
 class Neuron
 {
 public:
-    Neuron(const vector<int> &inputs);
+    Neuron(const vector<double> &inputs);
+    const vector<double> &getInputs() const;
     double calculateOutput();
     void print();
 
 private:
-    vector<int> inputs;
+    vector<double> inputs;
     vector<double> weights;
     vector<double> deltas;
     double output;

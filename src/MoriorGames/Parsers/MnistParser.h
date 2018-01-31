@@ -1,11 +1,11 @@
 #ifndef MORIOR_GAMES_PARSERS_MNIST_PARSER_H
 #define MORIOR_GAMES_PARSERS_MNIST_PARSER_H
 
-#include <string>
+#include <vector>
 #include <iostream>
 #include <fstream>
 
-typedef unsigned char uchar;
+using namespace std;
 
 namespace MoriorGames {
 
@@ -13,27 +13,24 @@ class MnistParser
 {
 public:
     MnistParser(const std::string &imageFile, const std::string &labelsFile);
-    void showRandomCharacterInBinary();
+    void showImageInBinary();
 
-    uchar **getImages() const
+    vector<double> getImages() const
     {
         return images;
     }
 
-    uchar *getLabels() const
+    vector<double> getLabels() const
     {
         return labels;
     }
 
 private:
-    int numberOfImages;
-    int imageSize;
-    uchar **images;
-    uchar *labels;
+    vector<double> images;
+    vector<double> labels;
 
     void readImages(const std::string &filename);
     void readLabels(const std::string &filename);
-    int reverseInteger(int);
 };
 
 }

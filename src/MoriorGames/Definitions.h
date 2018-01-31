@@ -5,5 +5,6 @@
 #define INPUT_NEURONS 784
 #define HIDDEN_NEURONS 128
 #define OUTPUT_NEURONS 10
+#define LEARNING_RATE 0.3
 
 #endif

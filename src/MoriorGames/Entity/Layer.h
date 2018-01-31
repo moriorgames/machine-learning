@@ -13,12 +13,16 @@ class Layer
 {
 public:
     Layer(const vector<double> &inputs, const vector<double> &outputs);
+    void LearningProcess();
     void print();
 
 private:
-    Neuron *inputNeuron;
-    Neuron *hiddenNeuron;
-    Neuron *outputNeuron;
+    vector<double> inputs;
+    vector<double> outputs;
+    vector<double> hiddenOutput;
+    vector<double> lastOutput;
+    vector<Neuron *> hiddenNeurons;
+    vector<Neuron *> outputNeurons;
 };
 
 }

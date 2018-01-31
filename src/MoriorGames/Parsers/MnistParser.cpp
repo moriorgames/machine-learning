@@ -1,114 +1,82 @@
 #include "MnistParser.h"
+#include "../Definitions.h"
 
 using MoriorGames::MnistParser;
 
-MnistParser::MnistParser(const std::string &imageFile, const std::string &labelsFile)
+MnistParser::MnistParser(const string &imageFile, const string &labelsFile)
 {
     readImages(imageFile);
     readLabels(labelsFile);
 }
 
-void MnistParser::showRandomCharacterInBinary()
+void MnistParser::showImageInBinary()
 {
-    std::cout << "Number of imageFile: " << numberOfImages << std::endl;
+    cout << "Displaying Binary image " << endl;
+    cout << "Expected Image: ";
+    for (int i = 0; i < OUTPUT_NEURONS; i++) {
+        if (labels[i] == 1.0) {
+            cout << i << endl;
+        }
+    }
 
-    // show a random character
-    int ind;
+    for (int i = 1; i <= images.size(); ++i) {
+        cout << images[i];
+        if (i % IMAGE_SIZE == 0) {
+            cout << endl;
+        }
+    }
+}
 
-    /* initialize random seed: */
-    srand(time(NULL));
+void MnistParser::readImages(const string &filename)
+{
+    ifstream file(filename, ios::in | ios::binary);
 
-    /* generate secret number: */
-    ind = rand() % numberOfImages;
+    if (file.is_open()) {
 
-    std::cout << "" << std::endl;
-    std::cout << "Opening a  example: " << std::endl;
-    std::cout << +labels[ind] << std::endl;
-    std::cout << "" << std::endl;
+        // Reading file headers
+        char number;
+        for (int i = 1; i <= 16; ++i) {
+            file.read(&number, sizeof(char));
+        }
 
-    // 28 rows
-    for (int i = 0; i < 28; i++) {
-        // 28 cols
-        for (int j = 0; j < 28; j++) {
-            if (images[ind][i * 28 + j] > 80) {
-                std::cout << ".";
+        // Reading image
+        for (int i = 0; i < INPUT_NEURONS; ++i) {
+            file.read(&number, sizeof(char));
+            if (number == 0) {
+                images.push_back(0);
             } else {
-                std::cout << "#";
+                images.push_back(1);
             }
         }
-        std::cout << "" << std::endl;
-    }
 
+    } else {
+        throw runtime_error("Cannot open file `" + filename + "`!");
+    }
 }
 
-void MnistParser::readImages(const std::string &filename)
+void MnistParser::readLabels(const string &filename)
 {
-    std::ifstream file(filename);
+    ifstream file(filename, ios::in | ios::binary);
 
     if (file.is_open()) {
-        int magicNumber = 0, rows = 0, cols = 0;
 
-        file.read((char *) &magicNumber, sizeof(magicNumber));
-        magicNumber = reverseInteger(magicNumber);
+        // Reading file headers for Labels
+        char number;
+        for (int i = 1; i <= 8; ++i) {
+            file.read(&number, sizeof(char));
+        }
 
-        if (magicNumber != 2051) { throw std::runtime_error("Invalid MNIST image file!"); }
-
-        file.read((char *) &numberOfImages, sizeof(numberOfImages)), numberOfImages =
-                                                                         reverseInteger(numberOfImages);
-        file.read((char *) &rows, sizeof(rows)), rows = reverseInteger(rows);
-        file.read((char *) &cols, sizeof(cols)), cols = reverseInteger(cols);
-
-        imageSize = rows * cols;
-
-        images = new uchar *[numberOfImages];
-        for (int i = 0; i < numberOfImages; i++) {
-            images[i] = new uchar[imageSize];
-            file.read((char *) images[i], imageSize);
+        // Reading labels
+        file.read(&number, sizeof(char));
+        for (int i = 0; i < OUTPUT_NEURONS; ++i) {
+            if (i == (int) number) {
+                labels.push_back(1.0);
+            } else {
+                labels.push_back(0.0);
+            }
         }
 
     } else {
-        throw std::runtime_error("Cannot open Images file `" + filename + "`!");
+        throw runtime_error("Cannot open file `" + filename + "`!");
     }
-}
-
-void MnistParser::readLabels(const std::string &filename)
-{
-    std::ifstream file(filename, std::fstream::in);
-
-    if (file.is_open()) {
-        int magicNumber = 0, nImages = 0;
-
-        file.read((char *) &magicNumber, sizeof(magicNumber));
-        magicNumber = reverseInteger(magicNumber);
-
-        if (magicNumber != 2049) { throw std::runtime_error("Invalid MNIST image file!"); }
-
-        file.read((char *) &nImages, sizeof(nImages)), nImages = reverseInteger(nImages);
-
-        if (numberOfImages
-            != nImages) { throw std::runtime_error("Labels don't correspond to the previous dataset!"); }
-
-        labels = new uchar[numberOfImages]();
-
-        uchar uch;
-        int i = 0;
-
-        while (file >> std::noskipws >> uch) {
-            labels[i++] = uch;
-        }
-
-    } else {
-        throw std::runtime_error("Cannot open file `" + filename + "`!");
-    }
-}
-
-int MnistParser::reverseInteger(int i)
-{
-    unsigned char ch1, ch2, ch3, ch4;
-    ch1 = i & 255;
-    ch2 = (i >> 8) & 255;
-    ch3 = (i >> 16) & 255;
-    ch4 = (i >> 24) & 255;
-
-    return ((int) ch1 << 24) + ((int) ch2 << 16) + ((int) ch3 << 8) + ch4;
 }

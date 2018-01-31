@@ -2,7 +2,7 @@
 
 using MoriorGames::MnistNeuralNetwork;
 
-void MnistNeuralNetwork::train(uchar **data, size_t miniBatchSize, float learningRate)
+void MnistNeuralNetwork::train()
 {
     // Start training your neural network
 }

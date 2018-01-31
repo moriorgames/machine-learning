@@ -8,7 +8,7 @@ namespace MoriorGames {
 class MnistNeuralNetwork
 {
 public:
-    void train(uchar **data, size_t miniBatchSize, float learningRate);
+    void train();
 };
 
 }

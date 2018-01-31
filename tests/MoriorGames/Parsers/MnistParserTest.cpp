@@ -7,7 +7,7 @@ using MoriorGames::MnistParser;
 BOOST_AUTO_TEST_CASE(should_be_able_to_read_and_store_mnist_files)
 {
     auto parser = new MnistParser("data/test-images-ubyte", "data/test-labels-ubyte");
-    parser->showRandomCharacterInBinary();
+    parser->showImageInBinary();
 }
 
 BOOST_AUTO_TEST_CASE(should_throw_exceptions_when_file_not_found)

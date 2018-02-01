@@ -17,6 +17,8 @@ public:
 
     vector<double> getImages() const
     {
+        vector<double> images{1, 2, 3};
+
         return images;
     }
 

@@ -3,9 +3,7 @@
 
 #include <vector>
 #include <iostream>
-#include <chrono>
-#include <random>
-#include "../Definitions.h"
+#include "Connection.h"
 
 using namespace std;
 
@@ -14,30 +12,14 @@ namespace MoriorGames {
 class Neuron
 {
 public:
-    Neuron(int kInputs);
-    double forwardPropagation(const vector<double> &inputs);
-    double backPropagation(const vector<double> &output, const vector<double> &expected);
+    Neuron(unsigned nextLayer);
+    double getOutput() const;
+    void setOutput(double output);
 
-    int size() const
-    {
-        return kInputs;
-    }
-
-    void setBias(double bias)
-    {
-        this->bias = bias;
-    }
 private:
-
-    int kInputs;
-    vector<double> weights;
-    vector<double> deltas;
     double output;
-    double bias;
+    vector<Connection *> outputWeights;
 
-    void print(const vector<double> &inputs);
-    void init();
-    double generateRandom();
     double sigmoid(double x);
 };
 

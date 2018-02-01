@@ -16,6 +16,7 @@ add_library(
         MoriorGames/Services/MnistNeuralNetwork.cpp
         MoriorGames/Services/Resolver.cpp
         MoriorGames/Utils/BlockTimer.cpp
+        MoriorGames/Entity/Connection.cpp
 )
 
 target_link_libraries(moriorgames_ml ${ARMADILLO_LIBRARIES})

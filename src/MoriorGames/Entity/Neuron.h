@@ -26,6 +26,7 @@ public:
     double getOutput() const;
     const vector<Connection *> &getOutputWeights() const;
     void setOutput(double output);
+    void print();
 
 private:
     unsigned index;

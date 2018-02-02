@@ -18,6 +18,8 @@ void Neuron::feedForward(Layer *layer)
     for (unsigned i = 0; i < layer->size(); ++i) {
         sum += layer->at(i)->getOutput() * layer->at(i)->getOutputWeights()[index]->weight;
     }
+
+    output = activationFunction(sum);
 }
 
 void Neuron::calculateOutputGradient(double output)
@@ -38,7 +40,12 @@ const vector<MoriorGames::Connection *> &Neuron::getOutputWeights() const
 
 void Neuron::setOutput(double output)
 {
-    Neuron::output = output;
+    this->output = output;
+}
+
+void Neuron::print()
+{
+
 }
 
 /**
@@ -50,12 +57,14 @@ void Neuron::setOutput(double output)
  */
 double Neuron::activationFunction(double x)
 {
-    return tanh(x);
+    return 1.0 / (1.0 + exp(-x));
 }
 
 double Neuron::activationFunctionDerivative(double x)
 {
-    return 1.0 - x * x;
+    auto f = activationFunction(x);
+
+    return f * (1 - f);
 }
 
 void Neuron::calculateHiddenGradient(const Layer *nextLayer)

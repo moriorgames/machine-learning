@@ -3,6 +3,7 @@
 
 #include <vector>
 #include <iostream>
+#include <iomanip>
 #include <fstream>
 
 using namespace std;
@@ -12,7 +13,9 @@ namespace MoriorGames {
 class MnistParser
 {
 public:
-    MnistParser(const std::string &imageFile, const std::string &labelsFile);
+    MnistParser(const string &imageFile, const string &labelsFile);
+    void nextImage();
+    void nextLabel();
     void showImageInBinary();
 
     vector<double> getImages() const
@@ -26,11 +29,15 @@ public:
     }
 
 private:
+    string imageFile;
+    string labelsFile;
+    ifstream imageFileStream;
+    ifstream labelsFileStream;
     vector<double> images;
     vector<double> labels;
 
-    void readImages(const std::string &filename);
-    void readLabels(const std::string &filename);
+    void readImages();
+    void readLabels();
 };
 
 }

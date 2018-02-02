@@ -4,21 +4,61 @@
 using MoriorGames::MnistParser;
 
 MnistParser::MnistParser(const string &imageFile, const string &labelsFile)
+    : imageFile{imageFile}, labelsFile{labelsFile}
 {
-    readImages(imageFile);
-    readLabels(labelsFile);
+    readImages();
+    readLabels();
+}
+
+void MnistParser::nextImage()
+{
+    images.clear();
+
+    // Reading image
+    char number;
+    for (int i = 0; i < INPUT_NEURONS; ++i) {
+        imageFileStream.read(&number, sizeof(char));
+        if (number == 0) {
+            images.push_back(0);
+        } else {
+            images.push_back(1);
+        }
+    }
+}
+void MnistParser::nextLabel()
+{
+    labels.clear();
+
+    // Reading labels
+    char number;
+    labelsFileStream.read(&number, sizeof(char));
+    for (int i = 0; i < OUTPUT_NEURONS; ++i) {
+        if (i == (int) number) {
+            labels.push_back(1.0);
+        } else {
+            labels.push_back(0.0);
+        }
+    }
 }
 
 void MnistParser::showImageInBinary()
 {
-    cout << "Displaying Binary image " << endl;
-    cout << "Expected Image: ";
+    cout << fixed;
+    cout << setprecision(0);
+    cout << "Displaying expected Outputs: ";
+    for (int i = 0; i < OUTPUT_NEURONS; i++) {
+        cout << labels[i] << " ";
+    }
+    cout << endl;
+
+    cout << "Expected number: ";
     for (int i = 0; i < OUTPUT_NEURONS; i++) {
         if (labels[i] == 1.0) {
             cout << i << endl;
         }
     }
 
+    cout << "Displaying Binary image " << endl;
     for (int i = 1; i <= images.size(); ++i) {
         cout << images[i];
         if (i % IMAGE_SIZE == 0) {
@@ -27,56 +67,40 @@ void MnistParser::showImageInBinary()
     }
 }
 
-void MnistParser::readImages(const string &filename)
+void MnistParser::readImages()
 {
-    ifstream file(filename, ios::in | ios::binary);
+    imageFileStream.open(imageFile, ios::in | ios::binary);
 
-    if (file.is_open()) {
+    if (imageFileStream.is_open()) {
 
         // Reading file headers
         char number;
         for (int i = 1; i <= 16; ++i) {
-            file.read(&number, sizeof(char));
+            imageFileStream.read(&number, sizeof(char));
         }
 
-        // Reading image
-        for (int i = 0; i < INPUT_NEURONS; ++i) {
-            file.read(&number, sizeof(char));
-            if (number == 0) {
-                images.push_back(0);
-            } else {
-                images.push_back(1);
-            }
-        }
+        nextImage();
 
     } else {
-        throw runtime_error("Cannot open file `" + filename + "`!");
+        throw runtime_error("Cannot open file `" + imageFile + "`!");
     }
 }
 
-void MnistParser::readLabels(const string &filename)
+void MnistParser::readLabels()
 {
-    ifstream file(filename, ios::in | ios::binary);
+    labelsFileStream.open(labelsFile, ios::in | ios::binary);
 
-    if (file.is_open()) {
+    if (labelsFileStream.is_open()) {
 
         // Reading file headers for Labels
         char number;
         for (int i = 1; i <= 8; ++i) {
-            file.read(&number, sizeof(char));
+            labelsFileStream.read(&number, sizeof(char));
         }
 
-        // Reading labels
-        file.read(&number, sizeof(char));
-        for (int i = 0; i < OUTPUT_NEURONS; ++i) {
-            if (i == (int) number) {
-                labels.push_back(1.0);
-            } else {
-                labels.push_back(0.0);
-            }
-        }
+        nextLabel();
 
     } else {
-        throw runtime_error("Cannot open file `" + filename + "`!");
+        throw runtime_error("Cannot open file `" + labelsFile + "`!");
     }
 }

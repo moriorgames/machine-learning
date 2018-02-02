@@ -10,9 +10,14 @@ int main()
     auto parser = new MnistParser("data/test-images-ubyte", "data/test-labels-ubyte");
     parser->showImageInBinary();
 
-    vector<unsigned > topology{3, 2, 1};
+    vector<unsigned> topology{INPUT_NEURONS, HIDDEN_NEURONS, OUTPUT_NEURONS};
     auto net = new MnistNeuralNetwork(topology);
-    net->feedForward(parser->getImages());
+
+    for (int i = 0; i < EPOCHS; ++i) {
+        net->feedForward(parser->getImages());
+        net->backPropagation(parser->getLabels());
+        net->getResults();
+    }
 
     return 0;
 }

@@ -2,7 +2,7 @@
 #define MORIOR_GAMES_SERVICES_MNIST_NEURAL_NETWORK_H
 
 #include <cassert>
-#include "../Entity/Layer.h"
+#include "../Entity/Neuron.h"
 
 using MoriorGames::Layer;
 

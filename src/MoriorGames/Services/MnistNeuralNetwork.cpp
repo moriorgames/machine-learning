@@ -10,7 +10,7 @@ MnistNeuralNetwork::MnistNeuralNetwork(const vector<unsigned> &topology)
         auto nextLayer = countNextLayerNeurons(i, topology);
 
         for (unsigned j = 0; j <= topology[i]; ++j) {
-            layer->neurons.push_back(new Neuron(nextLayer));
+            layer->push_back(new Neuron(j, nextLayer));
         }
         layers.push_back(layer);
     }
@@ -18,10 +18,19 @@ MnistNeuralNetwork::MnistNeuralNetwork(const vector<unsigned> &topology)
 
 void MnistNeuralNetwork::feedForward(const vector<double> &inputs)
 {
-    assert(inputs.size() == layers[0]->neurons.size() - 1);
+    assert(inputs.size() == layers[0]->size() - 1);
 
-    for (unsigned i = 0; i < inputs.size(); ++i) {
-        layers[0]->neurons[i]->setOutput(inputs[i]);
+    for (int i = 0; i < layers.size(); ++i) {
+        if (i == 0) {
+            for (unsigned j = 0; j < inputs.size(); ++j) {
+                layers[i]->at(j)->setOutput(inputs[j]);
+            }
+        } else {
+            auto previousLayer = layers[i - 1];
+            for (unsigned j = 0; j < layers[i]->size() - 1; ++j) {
+                layers[i]->at(j)->feedForward(previousLayer);
+            }
+        }
     }
 }
 

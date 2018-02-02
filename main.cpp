@@ -14,8 +14,5 @@ int main()
     auto net = new MnistNeuralNetwork(topology);
     net->feedForward(parser->getImages());
 
-
-
-
     return 0;
 }

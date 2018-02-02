@@ -59,6 +59,8 @@ void MnistNeuralNetwork::getResults()
     }
     cout << endl;
 
+    cout << fixed;
+    cout << setprecision(5);
     int result = 0;
     for (int i = 0; i < outputLayer->size() - 1; ++i) {
         if (outputLayer->at(i)->getOutput() == max) {
@@ -87,7 +89,7 @@ double MnistNeuralNetwork::calculateRootMeanSquareError(const vector<double> &ou
     error /= outputLayer->size() - 1;
     error = sqrt(error);
 
-    cout << "Calculate Root Mean Square Error:" << error << endl;
+//    cout << "Calculate Root Mean Square Error:" << error << endl;
 
     return error;
 }

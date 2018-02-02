@@ -10,6 +10,6 @@
 // Neural net configuration
 #define LEARNING_RATE   0.15
 #define MOMENTUM        0.5
-#define EPOCHS          12
+#define EPOCHS          512
 
 #endif

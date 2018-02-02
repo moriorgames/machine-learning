@@ -5,8 +5,6 @@ using MoriorGames::Neuron;
 Neuron::Neuron(unsigned index, unsigned nextLayer)
     : index{index}
 {
-    cout << "Made a Neuron" << endl;
-    cout << "Index: " << index << " nextLayer: " << nextLayer << endl;
     for (unsigned i = 0; i < nextLayer; ++i) {
         outputWeights.push_back(new Connection);
     }
@@ -18,10 +16,14 @@ void Neuron::feedForward(Layer *layer)
 
     // Sum the previous layer outputs and add the Bias Neuron output
     for (unsigned i = 0; i < layer->size(); ++i) {
-        cout << "i: " << i << " Index: " << index << endl;
         sum += layer->at(i)->getOutput() * layer->at(i)->getOutputWeights()[index]->weight;
     }
+}
 
+void Neuron::calculateOutputGradient(double output)
+{
+    double delta = output - this->output;
+    gradient = delta * activationFunctionDerivative(output);
 }
 
 double Neuron::getOutput() const
@@ -54,4 +56,43 @@ double Neuron::activationFunction(double x)
 double Neuron::activationFunctionDerivative(double x)
 {
     return 1.0 - x * x;
+}
+
+void Neuron::calculateHiddenGradient(const Layer *nextLayer)
+{
+    double dow = sumDow(nextLayer);
+    gradient = dow * activationFunctionDerivative(output);
+}
+
+double Neuron::sumDow(const Layer *nextLayer) const
+{
+    double sum = 0.0;
+
+    // Sum our contributions of the errors at the nodes we feed.
+
+    for (unsigned i = 0; i < nextLayer->size() - 1; ++i) {
+        sum += outputWeights[i]->weight * nextLayer->at(i)->gradient;
+    }
+
+    return sum;
+}
+
+void Neuron::updateInputWeights(Layer *previousLayer)
+{
+    // The weights to be updated are in the Connection container
+    // in the neurons in the preceding layer
+
+    for (auto &neuron:*previousLayer) {
+        double oldDeltaWeight = neuron->outputWeights[index]->deltaWeight;
+
+        double newDeltaWeight = calculateDeltaWeight(oldDeltaWeight, neuron);
+
+        neuron->outputWeights[index]->deltaWeight = newDeltaWeight;
+        neuron->outputWeights[index]->weight += newDeltaWeight;
+    }
+}
+
+double Neuron::calculateDeltaWeight(double delta, Neuron *neuron) const
+{
+    return LEARNING_RATE * neuron->getOutput() * gradient + MOMENTUM * delta;
 }

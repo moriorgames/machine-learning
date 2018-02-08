@@ -32,7 +32,7 @@ private:
     unsigned index;
     double output;
     double gradient;
-    vector<Connection *> outputWeights;
+    vector<Connection *> connections;
 
     double activationFunction(double x);
     double activationFunctionDerivative(double x);

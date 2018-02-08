@@ -69,6 +69,10 @@ void MnistNeuralNetwork::getResults()
         }
         result++;
     }
+
+    cout << "MSE: " << error << endl;
+    cout << endl;
+    cout << endl;
 }
 
 unsigned MnistNeuralNetwork::countNextLayerNeurons(int index, const vector<unsigned> &topology)

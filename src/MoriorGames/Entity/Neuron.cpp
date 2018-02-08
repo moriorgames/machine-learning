@@ -6,7 +6,7 @@ Neuron::Neuron(unsigned index, unsigned nextLayer)
     : index{index}
 {
     for (unsigned i = 0; i < nextLayer; ++i) {
-        outputWeights.push_back(new Connection);
+        connections.push_back(new Connection);
     }
 }
 
@@ -35,7 +35,7 @@ double Neuron::getOutput() const
 
 const vector<MoriorGames::Connection *> &Neuron::getOutputWeights() const
 {
-    return outputWeights;
+    return connections;
 }
 
 void Neuron::setOutput(double output)
@@ -45,7 +45,10 @@ void Neuron::setOutput(double output)
 
 void Neuron::print()
 {
-
+    cout << "Connection Weights" << endl;
+    for (auto connection:connections) {
+        cout << connection->weight << endl;
+    }
 }
 
 /**
@@ -80,7 +83,7 @@ double Neuron::sumDow(const Layer *nextLayer) const
     // Sum our contributions of the errors at the nodes we feed.
 
     for (unsigned i = 0; i < nextLayer->size() - 1; ++i) {
-        sum += outputWeights[i]->weight * nextLayer->at(i)->gradient;
+        sum += connections[i]->weight * nextLayer->at(i)->gradient;
     }
 
     return sum;
@@ -92,12 +95,12 @@ void Neuron::updateInputWeights(Layer *previousLayer)
     // in the neurons in the preceding layer
 
     for (auto &neuron:*previousLayer) {
-        double oldDeltaWeight = neuron->outputWeights[index]->deltaWeight;
+        double oldDeltaWeight = neuron->connections[index]->deltaWeight;
 
         double newDeltaWeight = calculateDeltaWeight(oldDeltaWeight, neuron);
 
-        neuron->outputWeights[index]->deltaWeight = newDeltaWeight;
-        neuron->outputWeights[index]->weight += newDeltaWeight;
+        neuron->connections[index]->deltaWeight = newDeltaWeight;
+        neuron->connections[index]->weight += newDeltaWeight;
     }
 }
 

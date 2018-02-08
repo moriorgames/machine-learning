@@ -7,7 +7,7 @@ using MoriorGames::MnistNeuralNetwork;
 
 int main()
 {
-    auto parser = new MnistParser("data/test-images-ubyte", "data/test-labels-ubyte");
+    auto parser = new MnistParser("data/train-images-ubyte", "data/train-labels-ubyte");
 
     vector<unsigned> topology{INPUT_NEURONS, HIDDEN_NEURONS, OUTPUT_NEURONS};
     auto net = new MnistNeuralNetwork(topology);

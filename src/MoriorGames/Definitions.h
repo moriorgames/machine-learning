@@ -8,8 +8,8 @@
 #define OUTPUT_NEURONS  10
 
 // Neural net configuration
-#define LEARNING_RATE   0.15
-#define MOMENTUM        0.5
-#define EPOCHS          512
+#define LEARNING_RATE   0.07
+#define MOMENTUM        0.3
+#define EPOCHS          333
 
 #endif
